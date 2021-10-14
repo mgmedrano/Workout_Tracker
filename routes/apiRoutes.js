@@ -20,7 +20,6 @@ module.exports = function(app) {
         });
     });
 
-// NoSQL Activity 11-Stu-Mongoose-Schema server.js
     app.post("/api/workouts", (req, res) => {
         db.Workout.create(req, body)
         .then(dbWorkout) => {
