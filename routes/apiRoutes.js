@@ -2,7 +2,8 @@ const db = require("../models");
 
 module.exports = function(app) {
     app.get("/api/workouts", (req, res) => {
-        db.Workout.find({}).then(dbWorkout => {
+        db.Workout.find({})
+        .then(dbWorkout => {
             res.json(dbWorkout);
         })
         .catch(err => {
@@ -11,7 +12,29 @@ module.exports = function(app) {
     })
 
     app.get("/api/workouts/range", ({}, res) => {
-        db.Workout.find({}).then(dbWorkout) => {
+        db.Workout.find({})
+        .then(dbWorkout) => {
+            res.json(dbWorkout);
+        }).catch(err => {
+            res.status(400).json(err);
+        });
+    });
+
+// NoSQL Activity 11-Stu-Mongoose-Schema server.js
+    app.post("/api/workouts", (req, res) => {
+        db.Workout.create(req, body)
+        .then(dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  });
+
+    app.put("/api/workouts/:id", (req, res) => {
+        db.Workout.findByIdAndUpdate(
+            {_id: req.params.id }, { exercise: req.body }
+        ).then((dbWorkout) => {
             res.json(dbWorkout);
         }).catch(err => {
             res.status(400).json(err);
