@@ -1,10 +1,19 @@
-const router = require ("express").Router();
-const path = require("path");
 const db = require("../models");
 
 module.exports = function(app) {
     app.get("/api/workouts", (req, res) => {
-        db.Workout.find({}).then(dbWorkout => {
+        db.aggregate([
+            {
+                $addFields: {
+                    totalDuration: {
+                        $sum:'$exercises.duration',
+                    },
+                },
+            },
+        ])
+            // Workout.find({})
+        
+        .then(dbWorkout => {
             res.json(dbWorkout);
         })
         .catch(err => {
@@ -13,7 +22,14 @@ module.exports = function(app) {
     })
     
     app.get("/api/workouts/range", ({}, res) => {
-      db.Workout.find({})
+      db.aggregate([
+          $addFields: {
+              totalDuration: {
+                  $sum:'$exercises.duration',
+              },
+          },
+      ])
+    //   Workout.find({})
       .limit(7)
       .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -40,13 +56,3 @@ module.exports = function(app) {
         });
     });
 };
-
-router.get("/exercise", function (req,res) {
-    res.sendFile(path.join(_dirname, "../public/exercise.html"));
-});
-
-router.get("/stats", function (req.res) {
-    res.sendFile(path.join(_dirname, "../public/stats.html"));
-});
-
-module.exports = router;
