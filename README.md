@@ -6,6 +6,7 @@ As a user, I want to be able to view create and track daily workouts. I want to 
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
+* [Preview](#preview)
 * [Contribution](#contribution)
 * [License](#license)
 * [Questions](#questions)
@@ -20,8 +21,11 @@ As a user, I want to be able to view create and track daily workouts. I want to 
 ## Usage
 Add exercises to the most recent workout plan, add new exercises to new workout plan, view combined weight of multiple exercises from the past seven workouts on the `stats` page, view total duration of each workout from past seven workouts on `stats` page.
 
+# Preview 
+> Preview ![Workout Tracker](assets/workoutPrev.png) 
+
 ## Contribution
-Reachout to me to contribute to this project
+Reach out to me to contribute to this project
 
 ## Questions
 For questions about this project, please see my GitHub at [mgmedrano](https://github.com/mgmedrano), or reach out by email at mgmedrano0203@gmail.com.
