@@ -2,17 +2,15 @@ const db = require("../models");
 
 module.exports = function(app) {
     app.get("/api/workouts", (req, res) => {
-        db.aggregate([
+        db.Workout.aggregate([
             {
                 $addFields: {
                     totalDuration: {
-                        $sum:'$exercises.duration',
+                        $sum: '$exercises.duration',
                     },
                 },
             },
         ])
-            // Workout.find({})
-        
         .then(dbWorkout => {
             res.json(dbWorkout);
         })
@@ -22,14 +20,15 @@ module.exports = function(app) {
     })
     
     app.get("/api/workouts/range", ({}, res) => {
-      db.aggregate([
+      db.Workout.aggregate([
+          {
           $addFields: {
               totalDuration: {
-                  $sum:'$exercises.duration',
+                  $sum: '$exercises.duration',
               },
           },
+        },
       ])
-    //   Workout.find({})
       .limit(7)
       .then((dbWorkout) => {
         res.json(dbWorkout);
