@@ -2,7 +2,18 @@ const db = require("../models");
 
 module.exports = function(app) {
     app.get("/api/workouts", (req, res) => {
-        db.Workout.find({}).then(dbWorkout => {
+        db.Workout.aggregate([
+            {
+                $addFields: {
+                    totalDuration: {
+                        $sum: '$exercises.duration',
+                    },
+                },
+            },
+        ])
+        
+        
+        .then(dbWorkout => {
             res.json(dbWorkout);
         })
         .catch(err => {
